@@ -1,7 +1,7 @@
 {
   "name": "taalswap-core",
   "description": "🎛 Core contracts for the taal protocol",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "homepage": "https://taalswap.finance",
   "repository": {
     "type": "git",
