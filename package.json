@@ -41,7 +41,7 @@
     "test": "mocha",
     "prepublishOnly": "yarn test"
   },
-  "license": "GPL-3.0-or-later",
+  "license": "MIT",
   "dependencies": {
     "truffle-hdwallet-provider": "^1.0.17",
     "truffle": "^5.1.41",
