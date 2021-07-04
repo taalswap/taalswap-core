@@ -1,12 +1,12 @@
 pragma solidity =0.5.16;
 
+import './interfaces/ITaalCallee.sol';
+import './interfaces/ITaalFactory.sol';
+import './interfaces/IERC20.sol';
+import './libraries/UQ112x112.sol';
+import './libraries/Math.sol';
 import './interfaces/ITaalPair.sol';
 import './TaalERC20.sol';
-import './libraries/Math.sol';
-import './libraries/UQ112x112.sol';
-import './interfaces/IERC20.sol';
-import './interfaces/ITaalFactory.sol';
-import './interfaces/ITaalCallee.sol';
 
 contract TaalPair is ITaalPair, TaalERC20 {
     using SafeMath  for uint;

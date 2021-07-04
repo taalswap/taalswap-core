@@ -1,7 +1,7 @@
 pragma solidity =0.5.16;
 
-import './interfaces/ITaalERC20.sol';
 import './libraries/SafeMath.sol';
+import './interfaces/ITaalERC20.sol';
 
 contract TaalERC20 is ITaalERC20 {
     using SafeMath for uint;

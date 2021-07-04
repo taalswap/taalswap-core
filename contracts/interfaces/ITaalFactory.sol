@@ -14,4 +14,6 @@ interface ITaalFactory {
 
     function setFeeTo(address) external;
     function setFeeToSetter(address) external;
+
+    function INIT_CODE_PAIR_HASH() external view returns (bytes32);
 }

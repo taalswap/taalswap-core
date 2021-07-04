@@ -1,7 +1,7 @@
 pragma solidity =0.5.16;
 
-import './interfaces/ITaalFactory.sol';
 import './TaalPair.sol';
+import './interfaces/ITaalFactory.sol';
 
 contract TaalFactory is ITaalFactory {
     bytes32 public constant INIT_CODE_PAIR_HASH = keccak256(abi.encodePacked(type(TaalPair).creationCode));
