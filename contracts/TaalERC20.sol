@@ -5,7 +5,7 @@ import './interfaces/ITaalERC20.sol';
 /**
  * Fix : [Suggestion] Malleable attack risk
  */
-import '@openzeppelin/contracts/utils/cryptography/ECDSA.sol';
+import './libraries/ECDSA.sol';
 
 contract TaalERC20 is ITaalERC20 {
     using SafeMath for uint;
@@ -95,7 +95,7 @@ contract TaalERC20 is ITaalERC20 {
          * Fix : [Suggestion] Malleable attack risk
          */
         // address recoveredAddress = ecrecover(digest, v, r, s);
-        address recoveredAddress = recover(digest, v, r, s);
+        address recoveredAddress = ECDSA.recover(digest, v, r, s);
         require(recoveredAddress != address(0) && recoveredAddress == owner, 'Taal: INVALID_SIGNATURE');
         _approve(owner, spender, value);
     }
