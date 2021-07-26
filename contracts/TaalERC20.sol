@@ -91,10 +91,8 @@ contract TaalERC20 is ITaalERC20 {
                 keccak256(abi.encode(PERMIT_TYPEHASH, owner, spender, value, nonces[owner]++, deadline))
             )
         );
-        /**
-         * Fix : [Suggestion] Malleable attack risk
-         */
-        // address recoveredAddress = ecrecover(digest, v, r, s);
+        //// Fix : [Suggestion] Malleable attack risk
+        //// address recoveredAddress = ecrecover(digest, v, r, s);
         address recoveredAddress = ECDSA.recover(digest, v, r, s);
         require(recoveredAddress != address(0) && recoveredAddress == owner, 'Taal: INVALID_SIGNATURE');
         _approve(owner, spender, value);
