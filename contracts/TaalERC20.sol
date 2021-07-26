@@ -2,6 +2,10 @@ pragma solidity =0.5.16;
 
 import './libraries/SafeMath.sol';
 import './interfaces/ITaalERC20.sol';
+/**
+ * Fix : [Suggestion] Malleable attack risk
+ */
+import '@openzeppelin/contracts/utils/cryptography/ECDSA.sol';
 
 contract TaalERC20 is ITaalERC20 {
     using SafeMath for uint;
@@ -87,7 +91,11 @@ contract TaalERC20 is ITaalERC20 {
                 keccak256(abi.encode(PERMIT_TYPEHASH, owner, spender, value, nonces[owner]++, deadline))
             )
         );
-        address recoveredAddress = ecrecover(digest, v, r, s);
+        /**
+         * Fix : [Suggestion] Malleable attack risk
+         */
+        // address recoveredAddress = ecrecover(digest, v, r, s);
+        address recoveredAddress = recover(digest, v, r, s);
         require(recoveredAddress != address(0) && recoveredAddress == owner, 'Taal: INVALID_SIGNATURE');
         _approve(owner, spender, value);
     }
