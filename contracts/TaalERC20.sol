@@ -14,6 +14,7 @@ contract TaalERC20 is ITaalERC20 {
     string public constant symbol = 'TAL-LP';
     uint8 public constant decimals = 18;
     uint  public totalSupply;
+    uint _chainId;
     mapping(address => uint) public balanceOf;
     mapping(address => mapping(address => uint)) public allowance;
 
@@ -30,15 +31,16 @@ contract TaalERC20 is ITaalERC20 {
         assembly {
             chainId := chainid
         }
-        DOMAIN_SEPARATOR = keccak256(
-            abi.encode(
-                keccak256('EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)'),
-                keccak256(bytes(name)),
-                keccak256(bytes('1')),
-                chainId,
-                address(this)
-            )
-        );
+        _chainId = chainId;
+//        DOMAIN_SEPARATOR = keccak256(
+//            abi.encode(
+//                keccak256('EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)'),
+//                keccak256(bytes(name)),
+//                keccak256(bytes('1')),
+//                chainId,
+//                address(this)
+//            )
+//        );
     }
 
     function _mint(address to, uint value) internal {
@@ -84,6 +86,15 @@ contract TaalERC20 is ITaalERC20 {
 
     function permit(address owner, address spender, uint value, uint deadline, uint8 v, bytes32 r, bytes32 s) external {
         require(deadline >= block.timestamp, 'Taal: EXPIRED');
+        DOMAIN_SEPARATOR = keccak256(
+            abi.encode(
+                keccak256('EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)'),
+                keccak256(bytes(name)),
+                keccak256(bytes('1')),
+                _chainId,
+                address(this)
+            )
+        );
         bytes32 digest = keccak256(
             abi.encodePacked(
                 '\x19\x01',
