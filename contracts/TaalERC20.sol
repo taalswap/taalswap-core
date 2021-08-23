@@ -84,10 +84,10 @@ contract TaalERC20 is ITaalERC20 {
 
     function permit(address owner, address spender, uint value, uint deadline, uint8 v, bytes32 r, bytes32 s) external {
         require(deadline >= block.timestamp, 'Taal: EXPIRED');
-        uint chainId;
-        assembly {
-            chainId := chainid
-        }
+        uint chainId = 1001;
+//        assembly {
+//            chainId := chainid
+//        }
         DOMAIN_SEPARATOR = keccak256(
             abi.encode(
                 keccak256('EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)'),
